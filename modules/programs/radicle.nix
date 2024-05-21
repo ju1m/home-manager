@@ -64,6 +64,7 @@
         inherit options;
         freeformType = configFile.format.type;
       };
+      description = "";
     };
 
   publicExplorerSuffix = "$rid$path";
@@ -83,6 +84,7 @@ in {
             preferredNode = mkOption {
               type = str;
               default = "seed.radicle.garden";
+              description = "";
             };
           };
           vscode = {
@@ -90,6 +92,7 @@ in {
             extension = mkOption {
               type = str;
               default = "radicle-ide-plugins-team.radicle";
+              description = "";
             };
           };
         };
@@ -123,11 +126,13 @@ in {
           RUST_LOG = "info";
           RUST_BACKTRACE = "1";
         };
+        description = "";
       };
       node = {
         args = mkOption {
           type = str;
           default = "--listen 0.0.0.0:8776 --force";
+          description = "";
         };
         package = mkPackageOption pkgs "radicle-node" {};
       };
@@ -135,6 +140,7 @@ in {
         args = mkOption {
           type = str;
           default = "--listen 127.0.0.1:8080";
+          description = "";
         };
         package = mkPackageOption pkgs "radicle-httpd" {};
       };
@@ -142,6 +148,7 @@ in {
         publicExplorer = mkOption {
           type = str;
           default = "https://app.radicle.xyz/nodes/$host/$rid$path";
+          description = "";
         };
         preferredSeeds = mkOption {
           type = listOf str;
@@ -149,12 +156,14 @@ in {
             "z6MkrLMMsiPWUcNPHcRajuMi9mDfYckSoJyPwwnknocNYPm7@seed.radicle.garden:8776"
             "z6Mkmqogy2qEM2ummccUthFEaaHvyYmYBYh3dbe9W4ebScxo@ash.radicle.garden:8776"
           ];
+          description = "";
         };
         web = freeform {
           pinned = freeform {
             repositories = mkOption {
               type = listOf str;
               default = [];
+              description = "";
             };
           };
         };
@@ -162,36 +171,44 @@ in {
           alias = mkOption {
             type = str;
             default = config.home.username;
+            description = "";
           };
           network = mkOption {
             type = str;
             default = "main";
+            description = "";
           };
           relay = mkOption {
             type = bool;
             default = true;
+            description = "";
           };
           peers = freeform {
             type = mkOption {
               type = enum ["static" "dynamic"];
               default = "dynamic";
+              description = "";
             };
             target = mkOption {
               type = ints.unsigned;
               default = 8;
+              description = "";
             };
           };
           workers = mkOption {
             type = ints.unsigned;
             default = 8;
+            description = "";
           };
           policy = mkOption {
             type = enum ["allow" "block"];
             default = "block";
+            description = "";
           };
           scope = mkOption {
             type = enum ["all" "followed"];
             default = "all";
+            description = "";
           };
         };
       };

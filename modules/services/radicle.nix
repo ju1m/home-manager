@@ -50,14 +50,17 @@ in {
           type = str;
           default = "";
           example = "--listen 0.0.0.0:8776";
+          description = "";
         };
         environment = mkOption {
           type = attrsOf (nullOr (oneOf [str path package]));
           default = {};
+          description = "";
         };
         lazy = mkOption {
           type = bool;
           default = false;
+          description = "";
         };
       };
       httpd = {
@@ -66,10 +69,12 @@ in {
         args = mkOption {
           type = str;
           default = "--listen 127.0.0.1:8080";
+          description = "";
         };
         environment = mkOption {
           type = attrsOf (nullOr (oneOf [str path package]));
           default = {};
+          description = "";
         };
       };
     };
