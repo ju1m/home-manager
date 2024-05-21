@@ -47,7 +47,7 @@
     name = "config.json";
     path =
       pkgs.runCommand name {
-        nativeBuildInputs = [cfg.cli.package];
+        nativeBuildInputs = [cfg.node.package];
       } ''
         mkdir keys
         echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID/this/is/not/a/real/key/only/a/placeholder" \
@@ -72,12 +72,6 @@ in {
   options = {
     programs.radicle = {
       enable = mkEnableOption "Radicle";
-      cli = {
-        package = mkPackageOption pkgs "radicle-cli" {};
-      };
-      remote-helper = {
-        package = mkPackageOption pkgs "radicle-remote-helper" {};
-      };
       uri = {
         rad = {
           browser = {
@@ -165,12 +159,6 @@ in {
             };
           };
         };
-        cli = freeform {
-          hints = mkOption {
-            type = bool;
-            default = true;
-          };
-        };
         node = freeform {
           alias = mkOption {
             type = str;
@@ -228,7 +216,7 @@ in {
     ];
 
     home = {
-      packages = [cfg.cli.package cfg.remote-helper.package];
+      packages = [ cfg.node.package ];
       file.".radicle/${configFile.name}".source = configFile.path;
     };
 
