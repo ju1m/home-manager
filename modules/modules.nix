@@ -198,6 +198,7 @@ let
     ./programs/pylint.nix
     ./programs/qcal.nix
     ./programs/qutebrowser.nix
+    ./programs/radicle.nix
     ./programs/ranger.nix
     ./programs/rbw.nix
     ./programs/readline.nix
@@ -348,6 +349,7 @@ let
     ./services/psd.nix
     ./services/pueue.nix
     ./services/pulseeffects.nix
+    ./services/radicle.nix
     ./services/random-background.nix
     ./services/recoll.nix
     ./services/redshift-gammastep/gammastep.nix
