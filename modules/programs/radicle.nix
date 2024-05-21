@@ -170,7 +170,7 @@ in {
         node = freeform {
           alias = mkOption {
             type = str;
-            default = config.home.username;
+            default = ""; #config.home.username;
             description = "";
           };
           network = mkOption {
