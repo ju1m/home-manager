@@ -40,7 +40,6 @@
     ;
 
   cfg = config.programs.radicle;
-  opt = options.programs.radicle;
 
   configFile = rec {
     format = pkgs.formats.json {};
@@ -78,7 +77,7 @@ in {
             enable = mkOption {
               description = "Whether to enable `rad:`-URI handling by web browser";
               default = hasSuffix publicExplorerSuffix cfg.settings.publicExplorer;
-              defaultText = "`true` if a suitable value for ${toString opt.settings.publicExplorer} is detected.";
+              defaultText = "`true` if a suitable value for {option}`programs.radicle.settings.publicExplorer` is detected.";
               example = false;
             };
             preferredNode = mkOption {
@@ -203,7 +202,7 @@ in {
     assertions = [
       {
         assertion = cfg.uri.web-rad.enable -> cfg.uri.web-rad.browser != null;
-        message = "Could not detect preferred browser. Please set `${builtins.toString opt.uri.web-rad.browser}`.";
+        message = "Could not detect preferred browser. Please set {option}`programs.radicle.uri.web-rad.browser`.";
       }
       {
         assertion = 1 >= length (filter id [cfg.uri.rad.browser.enable cfg.uri.rad.vscode.enable]);
@@ -211,7 +210,7 @@ in {
       }
       {
         assertion = cfg.uri.rad.browser.enable -> hasSuffix publicExplorerSuffix cfg.settings.publicExplorer;
-        message = "${opt.uri.rad.browser.enable} is only compatible with ${cfg.settings.publicExplorer} ending in '${publicExplorerSuffix}.";
+        message = "{option}`programs.radicle.uri.rad.browser.enable` is only compatible with ${cfg.settings.publicExplorer} ending in '${publicExplorerSuffix}.";
       }
     ];
 

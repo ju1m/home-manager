@@ -31,7 +31,6 @@
     ;
 
   cfg = config.services.radicle;
-  opt = options.services.radicle;
 
   radicleHome = config.home.homeDirectory + "/.radicle";
 
@@ -80,7 +79,7 @@ in {
     assertions = [
       {
         assertion = cfg.httpd.enable -> cfg.node.enable;
-        message = "`${opt.httpd.enable}` requires `${opt.node.enable}`, since `radicle-httpd` depends on `radicle-node`";
+        message = "{option}`services.radicle.httpd.enable` requires {option}`services.radicle.node.enable`, since `radicle-httpd` depends on `radicle-node`";
       }
     ];
     systemd.user = {
