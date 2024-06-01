@@ -8547,7 +8547,7 @@ typically requires performing some manual steps, such as data
 conversion or moving files.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
-one of “18.09”, “19.03”, “19.09”, “20.03”, “20.09”, “21.03”, “21.05”, “21.11”, “22.05”, “22.11”, “23.05”, “23.11”, “24.05”</p>
+one of “18.09”, “19.03”, “19.09”, “20.03”, “20.09”, “21.03”, “21.05”, “21.11”, “22.05”, “22.11”, “23.05”, “23.11”, “24.05”, “24.11”</p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -13977,7 +13977,7 @@ strings concatenated with “\n”</p>
 <p>Controlling how commands are saved on the history list.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
-list of (one of “erasedups”, “ignoredups”, “ignorespace”)</p>
+list of (one of “erasedups”, “ignoredups”, “ignorespace”, “ignoreboth”)</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">[ ]</code></p>
@@ -29503,6 +29503,30 @@ boolean</p>
 
 <p><span class="emphasis"><em>Example:</em></span>
 <code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/khal.nix" target="_top">
+&lt;home-manager/modules/programs/khal.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.khal.package"></a><a class="term" href="options.xhtml#opt-programs.khal.package"><code class="option">programs.khal.package</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The khal package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.khal</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -48878,13 +48902,15 @@ TOML value</p>
 <code class="literal">{ }</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
-  assume_yes = true;
-  disable = [
-    &quot;flutter&quot;
-    &quot;node&quot;
-  ];
-  set_title = false;
-  cleanup = true;
+  misc = {
+    assume_yes = true;
+    disable = [
+      &quot;flutter&quot;
+      &quot;node&quot;
+    ];
+    set_title = false;
+    cleanup = true;
+  };
   commands = {
     &quot;Run garbage collection on Nix store&quot; = &quot;nix-collect-garbage&quot;;
   };
@@ -51851,13 +51877,71 @@ boolean</p>
  </span>
 </dt>
 <dd>
-<p>Yazi package to install.</p>
+<p>The yazi package to use.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 package</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">pkgs.yazi</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/yazi.nix" target="_top">
+&lt;home-manager/modules/programs/yazi.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.yazi.flavors"></a><a class="term" href="options.xhtml#opt-programs.yazi.flavors"><code class="option">programs.yazi.flavors</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Pre-made themes.</p><p>See https://yazi-rs.github.io/docs/flavors/overview/ for documentation.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of (path or package)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  foo = ./foo;
+  bar = pkgs.bar;
+}
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/yazi.nix" target="_top">
+&lt;home-manager/modules/programs/yazi.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.yazi.initLua"></a><a class="term" href="options.xhtml#opt-programs.yazi.initLua"><code class="option">programs.yazi.initLua</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The init.lua for Yazi itself.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or path</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">./init.lua</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -51897,6 +51981,37 @@ TOML value</p>
     { exec = &quot;quit&quot;; on = [ &quot;q&quot; ]; }
     { exec = &quot;close&quot;; on = [ &quot;&lt;C-q&gt;&quot; ]; }
   ];
+}
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/yazi.nix" target="_top">
+&lt;home-manager/modules/programs/yazi.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.yazi.plugins"></a><a class="term" href="options.xhtml#opt-programs.yazi.plugins"><code class="option">programs.yazi.plugins</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Lua plugins.</p><p>See https://yazi-rs.github.io/docs/plugins/overview/ for documentation.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of (path or package)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  foo = ./foo;
+  bar = pkgs.bar;
 }
 
 </code></pre>
@@ -61914,24 +62029,26 @@ attribute set of (submodule)</p>
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">{ }</code></p>
 
-<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">undocked = {
-  outputs = [
-    {
-      criteria = &quot;eDP-1&quot;;
-    }
-  ];
-};
-docked = {
-  outputs = [
-    {
-      criteria = &quot;eDP-1&quot;;
-    }
-    {
-      criteria = &quot;Some Company ASDF 4242&quot;;
-      transform = &quot;90&quot;;
-    }
-  ];
-};
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  undocked = {
+    outputs = [
+      {
+        criteria = &quot;eDP-1&quot;;
+      }
+    ];
+  };
+  docked = {
+    outputs = [
+      {
+        criteria = &quot;eDP-1&quot;;
+      }
+      {
+        criteria = &quot;Some Company ASDF 4242&quot;;
+        transform = &quot;90&quot;;
+      }
+    ];
+  };
+}
 
 </code></pre>
 
@@ -62222,28 +62339,30 @@ list of attribute-tagged union</p>
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">[ ]</code></p>
 
-<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{ include = &quot;path/to/included/files&quot;; }
-{ output.criteria = &quot;eDP-1&quot;;
-  output.scale = 2;
-}
-{ profile.name = &quot;undocked&quot;;
-  profile.outputs = [
-    {
-      criteria = &quot;eDP-1&quot;;
-    }
-  ];
-}
-{ profile.name = &quot;docked&quot;;
-  profile.outputs = [
-    {
-      criteria = &quot;eDP-1&quot;;
-    }
-    {
-      criteria = &quot;Some Company ASDF 4242&quot;;
-      transform = &quot;90&quot;;
-    }
-  ];
-}
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  { include = &quot;path/to/included/files&quot;; }
+  { output.criteria = &quot;eDP-1&quot;;
+    output.scale = 2;
+  }
+  { profile.name = &quot;undocked&quot;;
+    profile.outputs = [
+      {
+        criteria = &quot;eDP-1&quot;;
+      }
+    ];
+  }
+  { profile.name = &quot;docked&quot;;
+    profile.outputs = [
+      {
+        criteria = &quot;eDP-1&quot;;
+      }
+      {
+        criteria = &quot;Some Company ASDF 4242&quot;;
+        transform = &quot;90&quot;;
+      }
+    ];
+  }
+]
 
 </code></pre>
 
@@ -62948,7 +63067,7 @@ TOML value</p>
 
 <p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
   submission = {
-    tokenFile = &quot;/run/secrets/listenbrainz-mpd&quot;;
+    token_file = &quot;/run/secrets/listenbrainz-mpd&quot;;
   };
 }
 </code></pre>
